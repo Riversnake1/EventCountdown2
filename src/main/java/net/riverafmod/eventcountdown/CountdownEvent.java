@@ -11,13 +11,15 @@ public class CountdownEvent extends Event {
     public final CustomExecutor executor;
     @Nullable
     public final UUID uuid;
-    public CountdownEvent(CustomExecutor executor, boolean ensureContinuality) {
+    public int status;
+    public CountdownEvent(CustomExecutor executor, int ticksUntilActivation, boolean ensureContinuality) {
         isContinual = ensureContinuality;
         this.executor = executor;
-        if (isContinual) {
+        /*if (isContinual) {
             uuid = UUID.randomUUID();
-        } else {
+        } else {*/
             uuid = null;
-        }
+        //}
+        status = ticksUntilActivation;
     }
 }

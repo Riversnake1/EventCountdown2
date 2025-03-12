@@ -7,19 +7,12 @@ import java.util.UUID;
 
 
 public class CountdownEvent extends Event {
-    public final boolean isContinual;
-    public final CustomExecutor executor;
-    @Nullable
-    public final UUID uuid;
+    public final Runnable executor;
+    int pos;
     public int status;
-    public CountdownEvent(CustomExecutor executor, int ticksUntilActivation, boolean ensureContinuality) {
-        isContinual = ensureContinuality;
+    public CountdownEvent(Runnable executor, int ticksUntilActivation) {
         this.executor = executor;
-        /*if (isContinual) {
-            uuid = UUID.randomUUID();
-        } else {*/
-            uuid = null;
-        //}
+        pos = Countdowns.getInstance().add(this);
         status = ticksUntilActivation;
     }
 }
